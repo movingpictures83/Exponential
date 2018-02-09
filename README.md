@@ -2,6 +2,7 @@
 # Language: Python
 # Input: CSV (network)
 # Output: NOA (central nodes and centrality values)
+# Tested with: PluMA 1.0, Python 2.7
 
 PluMA plugin that computes Exponential Centrality (Benzi and Klymko, 2013),
 a method for finding the important nodes in a network.
