@@ -1,5 +1,6 @@
 import numpy
 import random
+random.seed(1234)   # ONLY FOR TESTING, COMMENT OUT FOR BETTER RANDOMNESS
 import PyPluMA
 
 class ExponentialPlugin:
