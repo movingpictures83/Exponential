@@ -3,6 +3,8 @@ import random
 random.seed(1234)   # ONLY FOR TESTING, COMMENT OUT FOR BETTER RANDOMNESS
 import PyPluMA
 
+EPS=1e-8
+
 class ExponentialPlugin:
    def input(self, filename):
       filestuff = open(filename, 'r')
@@ -56,12 +58,16 @@ class ExponentialPlugin:
      for i in range(len(UG)):
        PyPluMA.log(str((UG[i][1], UG[i][0])))
        bac = UG[i][1]
+       rank = len(UG)-i
+       if (i != 0 and abs(UG[i][0]-UG[i-1][0]) < EPS):
+          rank = oldrank
+       oldrank = rank
        if (bac[0] == '\"'):
           bac = bac[1:len(bac)-1]
-       if (UG[i][0] != UG[len(UG)-1][0]):
-         outfile.write(bac+"\t"+str(abs(UG[i][0]))+"\t"+str(len(UG)-i)+"\n")
-       else:
-         outfile.write(bac+"\t"+str(abs(UG[i][0]))+"\t"+"0\n")
+       #if (UG[i][0] != UG[len(UG)-1][0]):
+       outfile.write(bac+"\t"+str(abs(UG[i][0]))+"\t"+str(rank)+"\n")
+       #else:
+       #  outfile.write(bac+"\t"+str(abs(UG[i][0]))+"\t"+"0\n")
        centvals[i] = abs(UG[i][0])
 
      PyPluMA.log("Wrote file: "+filename)
